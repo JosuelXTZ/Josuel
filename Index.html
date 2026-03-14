@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Quiz do Josuel</title>
+</head>
+
+<body style="font-family:Arial;text-align:center;">
+
+<h1>Quiz</h1>
+
+<h2 id="pergunta"></h2>
+
+<div id="respostas"></div>
+
+<p id="resultado"></p>
+
+<script>
+
+let perguntas = [
+{
+pergunta:"Quanto é 2 + 2?",
+respostas:["3","4","5"],
+correta:1
+},
+{
+pergunta:"Capital do Brasil?",
+respostas:["Brasília","Rio","São Paulo"],
+correta:0
+}
+];
+
+let atual = 0;
+
+function mostrar(){
+
+let p = perguntas[atual];
+
+document.getElementById("pergunta").innerText = p.pergunta;
+
+let html="";
+
+p.respostas.forEach((r,i)=>{
+html += `<button onclick="responder(${i})">${r}</button><br><br>`;
+});
+
+document.getElementById("respostas").innerHTML = html;
+
+}
+
+function responder(i){
+
+if(i == perguntas[atual].correta){
+document.getElementById("resultado").innerText="Correto!";
+}else{
+document.getElementById("resultado").innerText="Errado!";
+}
+
+atual++;
+
+if(atual < perguntas.length){
+setTimeout(()=>{
+mostrar();
+document.getElementById("resultado").innerText="";
+},1000);
+}
+
+}
+
+mostrar();
+
+</script>
+
+</body>
+</html>
