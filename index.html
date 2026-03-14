@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Quiz Cristão</title>
+
+<style>
+body{
+font-family: Arial;
+background:#1b4d3e;
+color:white;
+text-align:center;
+padding:20px;
+}
+
+#quiz{
+background:white;
+color:black;
+padding:20px;
+border-radius:10px;
+max-width:500px;
+margin:auto;
+}
+
+button{
+display:block;
+width:100%;
+padding:10px;
+margin:8px 0;
+border:none;
+background:#1b4d3e;
+color:white;
+border-radius:5px;
+font-size:16px;
+}
+
+button:hover{
+background:#2e7d5a;
+}
+
+#resultado{
+margin-top:10px;
+font-weight:bold;
+}
+</style>
+
+</head>
+
+<body>
+
+<h1>📖 Quiz Cristão</h1>
+
+<div id="quiz">
+
+<h2 id="pergunta"></h2>
+
+<div id="respostas"></div>
+
+<p id="resultado"></p>
+
+</div>
+
+<script>
+
+let perguntas = [
+
+{
+pergunta:"Quem construiu a arca?",
+respostas:["Moisés","Noé","Abraão","Davi"],
+correta:1
+},
+
+{
+pergunta:"Quem matou Golias?",
+respostas:["Davi","Salomão","Pedro","Jacó"],
+correta:0
+},
+
+{
+pergunta:"Quem foi lançado na cova dos leões?",
+respostas:["Daniel","José","Paulo","Elias"],
+correta:0
+},
+
+{
+pergunta:"Quem abriu o mar vermelho?",
+respostas:["Pedro","Moisés","Abraão","Samuel"],
+correta:1
+},
+
+{
+pergunta:"Quem traiu Jesus?",
+respostas:["Pedro","Judas","João","Tiago"],
+correta:1
+}
+
+];
+
+let atual = 0;
+
+function mostrarPergunta(){
+
+let p = perguntas[atual];
+
+document.getElementById("pergunta").innerText = p.pergunta;
+
+let html="";
+
+p.respostas.forEach((r,i)=>{
+html += `<button onclick="responder(${i})">${r}</button>`;
+});
+
+document.getElementById("respostas").innerHTML = html;
+
+}
+
+function responder(i){
+
+if(i === perguntas[atual].correta){
+
+document.getElementById("resultado").innerText="✅ Resposta correta!";
+
+atual++;
+
+if(atual >= perguntas.length){
+document.getElementById("quiz").innerHTML="<h2>🎉 Você terminou o quiz!</h2>";
+return;
+}
+
+setTimeout(()=>{
+document.getElementById("resultado").innerText="";
+mostrarPergunta();
+},1000);
+
+}else{
+
+document.getElementById("resultado").innerText="❌ Resposta errada. Tente novamente.";
+
+}
+
+}
+
+mostrarPergunta();
+
+</script>
+
+</body>
+</html>
