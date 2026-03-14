@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<title>JM Notícias</title>
+
+<style>
+
+body{
+margin:0;
+font-family:Arial;
+background:#eef3ff;
+}
+
+header{
+background:#1565ff;
+color:white;
+text-align:center;
+padding:25px;
+}
+
+#noticias{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.card{
+background:white;
+border-radius:10px;
+overflow:hidden;
+box-shadow:0 4px 10px rgba(0,0,0,0.1);
+}
+
+.card img{
+width:100%;
+height:170px;
+object-fit:cover;
+}
+
+.card h3{
+padding:10px;
+font-size:18px;
+}
+
+.card a{
+display:block;
+padding:10px;
+color:#1565ff;
+font-weight:bold;
+text-decoration:none;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>
+<h1>JM Notícias</h1>
+<p>Atualizado automaticamente</p>
+</header>
+
+<div id="noticias"></div>
+
+<script>
+
+async function carregarNoticias(){
+
+let url="https://api.allorigins.win/raw?url=https://news.google.com/rss?hl=pt-BR&gl=BR&ceid=BR:pt-419";
+
+let res=await fetch(url);
+let texto=await res.text();
+
+let parser=new DOMParser();
+let xml=parser.parseFromString(texto,"text/xml");
+
+let itens=xml.querySelectorAll("item");
+
+let area=document.getElementById("noticias");
+
+area.innerHTML="";
+
+itens.forEach((item,i)=>{
+
+if(i>12)return;
+
+let titulo=item.querySelector("title").textContent;
+let link=item.querySelector("link").textContent;
+
+let img="https://picsum.photos/400/200?random="+i;
+
+area.innerHTML+=`
+
+<div class="card">
+
+<img src="${img}">
+
+<h3>${titulo}</h3>
+
+<a href="${link}" target="_blank">Ler notícia</a>
+
+</div>
+
+`;
+
+});
+
+}
+
+carregarNoticias();
+
+setInterval(carregarNoticias,86400000);
+
+</script>
+
+</body>
+</html>
