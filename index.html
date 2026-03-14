@@ -2,137 +2,59 @@
 <html lang="pt-BR">
 <head>
 <meta charset="UTF-8">
-<title>Portal Josuel Notícias</title>
+<title>Portal Josuel</title>
 
 <style>
 
 body{
-font-family: Arial;
+font-family:Arial;
 margin:0;
-background:#f2f2f2;
+background:#f5f7fb;
 }
 
 header{
-background:#c4170c;
+background:#0b5ed7;
 color:white;
 padding:20px;
+text-align:center;
 font-size:32px;
 font-weight:bold;
-text-align:center;
 }
 
 nav{
-background:#9f0f05;
+background:white;
 padding:10px;
 text-align:center;
+border-bottom:2px solid #eee;
 }
 
 nav a{
-color:white;
 margin:15px;
 text-decoration:none;
+color:#0b5ed7;
 font-weight:bold;
+}
+
+.search{
+text-align:center;
+padding:20px;
+background:white;
+}
+
+.search input{
+width:60%;
+padding:10px;
+font-size:16px;
+border:1px solid #ccc;
+border-radius:5px;
 }
 
 .container{
 max-width:1200px;
 margin:auto;
 padding:20px;
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-gap:20px;
 }
 
-.card{
-background:white;
-border-radius:8px;
-overflow:hidden;
-box-shadow:0 4px 10px rgba(0,0,0,0.2);
-}
-
-.card img{
-width:100%;
-height:180px;
-object-fit:cover;
-}
-
-.card-content{
-padding:15px;
-}
-
-.card-content h3{
-margin:0;
-font-size:20px;
-}
-
-.card-content a{
-text-decoration:none;
-color:#c4170c;
-}
-
-.card-content p{
-font-size:14px;
-color:#555;
-}
-
-footer{
-background:#222;
-color:white;
-text-align:center;
-padding:15px;
-margin-top:20px;
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-Portal Josuel Notícias
-</header>
-
-<nav>
-<a href="#">Início</a>
-<a href="#">Brasil</a>
-<a href="#">Mundo</a>
-<a href="#">Tecnologia</a>
-<a href="#">Esporte</a>
-</nav>
-
-<div class="container" id="news"></div>
-
-<footer>
-© 2026 Portal Josuel Notícias
-</footer>
-
-<script>
-
-const url = "https://api.rss2json.com/v1/api.json?rss_url=https://g1.globo.com/rss/g1/";
-
-fetch(url)
-.then(res => res.json())
-.then(data => {
-
-let container = document.getElementById("news");
-
-data.items.slice(0,20).forEach(noticia => {
-
-container.innerHTML += `
-<div class="card">
-<img src="${noticia.thumbnail}">
-<div class="card-content">
-<h3><a href="${noticia.link}" target="_blank">${noticia.title}</a></h3>
-<p>${noticia.pubDate}</p>
-</div>
-</div>
-`;
-
-});
-
-});
-
-</script>
-
-</body>
-</html>
+.main-news{
+display:flex;
+gap:20
